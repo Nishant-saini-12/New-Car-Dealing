@@ -5,6 +5,7 @@ import connectDB from './config/database.js';
 import authRoutes from './routes/authRoutes.js';
 import carRoutes from './routes/carRoutes.js';
 import wishlistRoutes from './routes/wishlistRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -35,6 +36,7 @@ app.use('/api/user', authRoutes);
 app.use('/api/users', authRoutes);
 app.use('/api/cars', carRoutes);
 app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
