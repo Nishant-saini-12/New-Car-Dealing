@@ -1,0 +1,11 @@
+export const allCars = [
+  { id: 1, brand: 'Maruti', model: 'Swift', year: 2020, price: 6500, mileage: 25000, fuel: 'Petrol', location: 'Mumbai', image: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=600', seller: 'John Doe', status: 'available' },
+  { id: 2, brand: 'Hyundai', model: 'i20', year: 2021, price: 8200, mileage: 18000, fuel: 'Petrol', location: 'Delhi', image: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=600', seller: 'Jane Smith', status: 'available' },
+  { id: 3, brand: 'Honda', model: 'City', year: 2019, price: 9500, mileage: 35000, fuel: 'Diesel', location: 'Bangalore', image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600', seller: 'Mike Johnson', status: 'available' },
+  { id: 4, brand: 'Maruti', model: 'Baleno', year: 2022, price: 7800, mileage: 12000, fuel: 'Petrol', location: 'Mumbai', image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600', seller: 'Sarah Williams', status: 'available' },
+  { id: 5, brand: 'Tata', model: 'Nexon', year: 2021, price: 10500, mileage: 22000, fuel: 'Diesel', location: 'Pune', image: 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600', seller: 'David Brown', status: 'available' },
+  { id: 6, brand: 'Hyundai', model: 'Creta', year: 2020, price: 14500, mileage: 28000, fuel: 'Petrol', location: 'Delhi', image: 'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=600', seller: 'Emily Davis', status: 'available' },
+  { id: 7, brand: 'Honda', model: 'Amaze', year: 2023, price: 8900, mileage: 8000, fuel: 'Petrol', location: 'Chennai', image: 'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=600', seller: 'Robert Wilson', status: 'available' },
+  { id: 8, brand: 'Maruti', model: 'Dzire', year: 2021, price: 7200, mileage: 20000, fuel: 'Petrol', location: 'Bangalore', image: 'https://images.unsplash.com/photo-1590362891991-f776e747a588?w=600', seller: 'Lisa Anderson', status: 'available' },
+  { id: 9, brand: 'Tata', model: 'Altroz', year: 2022, price: 8500, mileage: 15000, fuel: 'Petrol', location: 'Hyderabad', image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600', seller: 'James Taylor', status: 'available' }
+];
