@@ -13,6 +13,7 @@ import ServicesPage from './components/ServicesPage';
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 import Footer from './components/Footer';
+import Chatbot from './components/Chatbot';
 import useDarkMode from './hooks/useDarkMode';
 
 export default function App() {
@@ -97,6 +98,9 @@ export default function App() {
       
       {/* Ad Popup */}
       {showAdPopup && <AdPopup onClose={() => setShowAdPopup(false)} />}
+      
+      {/* AI Chatbot */}
+      <Chatbot />
     </div>
   );
 }

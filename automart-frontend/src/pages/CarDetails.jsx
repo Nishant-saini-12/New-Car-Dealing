@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, MapPin, Gauge, Calendar, Fuel, User, Phone, Mail, Share2, Heart, Shield, CheckCircle } from 'lucide-react';
+import { ArrowLeft, MapPin, Gauge, Calendar, Fuel, User, Phone, Mail, Share2, Heart, Shield, CheckCircle, Calculator } from 'lucide-react';
 import { carAPI, wishlistAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
+import EMICalculatorModal from '../components/EMICalculatorModal';
 
 export default function CarDetails({ carId, onNavigate }) {
   const { isAuthenticated } = useAuth();
@@ -10,6 +11,7 @@ export default function CarDetails({ carId, onNavigate }) {
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [showEMIModal, setShowEMIModal] = useState(false);
 
   // Fetch car details from API
   useEffect(() => {
@@ -271,7 +273,14 @@ export default function CarDetails({ carId, onNavigate }) {
                     <Mail className="w-5 h-5" />
                     Send Message
                   </button>
-                  <button className="w-full border-2 border-gray-300 hover:bg-gray-50 text-gray-700 font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2">
+                  <button 
+                    onClick={() => setShowEMIModal(true)}
+                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 rounded-xl transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+                  >
+                    <Calculator className="w-5 h-5" />
+                    Calculate EMI
+                  </button>
+                  <button className="w-full border-2 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2">
                     <Share2 className="w-5 h-5" />
                     Share
                   </button>
@@ -297,6 +306,14 @@ export default function CarDetails({ carId, onNavigate }) {
           </div>
         </div>
       </div>
+
+      {/* EMI Calculator Modal */}
+      {showEMIModal && (
+        <EMICalculatorModal 
+          onClose={() => setShowEMIModal(false)}
+          carPrice={car.price}
+        />
+      )}
     </div>
   );
 }

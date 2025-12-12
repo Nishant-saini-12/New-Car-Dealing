@@ -8,6 +8,8 @@ import authRoutes from './routes/authRoutes.js';
 import carRoutes from './routes/carRoutes.js';
 import wishlistRoutes from './routes/wishlistRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import chatRoutes from './routes/chatRoutes.js';
+import emiRoutes from './routes/emiRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -41,6 +43,8 @@ app.use('/api/users', authRoutes);
 app.use('/api/cars', carRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api', chatRoutes);
+app.use('/api', emiRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {

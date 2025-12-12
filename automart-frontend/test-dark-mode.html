@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Mode Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-white dark:bg-gray-900 text-black dark:text-white transition-colors">
+  <div class="max-w-4xl mx-auto p-8">
+    <h1 class="text-4xl font-bold mb-8">🌓 Dark Mode Test</h1>
+    
+    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg mb-6">
+      <h2 class="text-2xl font-bold mb-4">Current Status</h2>
+      <div id="status" class="space-y-2 font-mono text-sm"></div>
+    </div>
+
+    <div class="space-y-4">
+      <button 
+        onclick="toggleDarkMode()"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold"
+      >
+        Toggle Dark Mode
+      </button>
+
+      <button 
+        onclick="addDarkClass()"
+        class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold"
+      >
+        Manually Add "dark" Class
+      </button>
+
+      <button 
+        onclick="removeDarkClass()"
+        class="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold"
+      >
+        Manually Remove "dark" Class
+      </button>
+
+      <button 
+        onclick="checkStatus()"
+        class="w-full bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold"
+      >
+        Check Status
+      </button>
+    </div>
+
+    <div class="mt-8 bg-yellow-100 dark:bg-yellow-900 p-6 rounded-lg">
+      <h3 class="text-xl font-bold mb-2">Test Card</h3>
+      <p class="text-gray-700 dark:text-gray-300">
+        This card should change color when dark mode is toggled.
+        If it doesn't change, dark mode is not working.
+      </p>
+    </div>
+
+    <div class="mt-8 space-y-4">
+      <div class="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+        <h4 class="font-bold mb-2">Expected Behavior:</h4>
+        <ul class="list-disc list-inside space-y-1 text-sm">
+          <li>Light Mode: White background, black text</li>
+          <li>Dark Mode: Dark gray background, white text</li>
+          <li>Toggle should change entire page instantly</li>
+          <li>HTML element should have "dark" class when dark mode is on</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateStatus() {
+      const html = document.documentElement;
+      const hasDarkClass = html.classList.contains('dark');
+      const htmlClasses = html.className || '(no classes)';
+      const savedTheme = localStorage.getItem('theme') || '(not set)';
+      
+      const status = document.getElementById('status');
+      status.innerHTML = `
+        <div><strong>HTML has "dark" class:</strong> ${hasDarkClass ? '✅ YES' : '❌ NO'}</div>
+        <div><strong>HTML classes:</strong> ${htmlClasses}</div>
+        <div><strong>localStorage theme:</strong> ${savedTheme}</div>
+        <div><strong>Current mode:</strong> ${hasDarkClass ? '🌙 DARK' : '☀️ LIGHT'}</div>
+      `;
+    }
+
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      
+      if (isDark) {
+        html.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        console.log('Switched to LIGHT mode');
+      } else {
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        console.log('Switched to DARK mode');
+      }
+      
+      updateStatus();
+    }
+
+    function addDarkClass() {
+      document.documentElement.classList.add('dark');
+      console.log('Manually added "dark" class');
+      updateStatus();
+    }
+
+    function removeDarkClass() {
+      document.documentElement.classList.remove('dark');
+      console.log('Manually removed "dark" class');
+      updateStatus();
+    }
+
+    function checkStatus() {
+      updateStatus();
+      console.log('Status checked');
+    }
+
+    // Initialize
+    updateStatus();
+    
+    // Auto-update every second
+    setInterval(updateStatus, 1000);
+  </script>
+</body>
+</html>
