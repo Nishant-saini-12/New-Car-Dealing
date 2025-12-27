@@ -3,15 +3,17 @@ import { ArrowLeft, MapPin, Gauge, Calendar, Fuel, User, Phone, Mail, Share2, He
 import { carAPI, wishlistAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import EMICalculatorModal from '../components/EMICalculatorModal';
+import Chat from '../components/Chat';
 
 export default function CarDetails({ carId, onNavigate }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const [car, setCar] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const [showEMIModal, setShowEMIModal] = useState(false);
+  const [showChat, setShowChat] = useState(false);
 
   // Fetch car details from API
   useEffect(() => {
@@ -49,6 +51,21 @@ export default function CarDetails({ carId, onNavigate }) {
 
     checkWishlist();
   }, [isAuthenticated, carId]);
+
+  const handleSendMessage = () => {
+    if (!isAuthenticated) {
+      alert('Please login to send a message');
+      return;
+    }
+    
+    if (!user) {
+      alert('User information not available');
+      return;
+    }
+
+    // Open chat modal
+    setShowChat(true);
+  };
 
   const handleToggleWishlist = async () => {
     if (!isAuthenticated) {
@@ -269,7 +286,10 @@ export default function CarDetails({ carId, onNavigate }) {
                     <Phone className="w-5 h-5" />
                     Call Seller
                   </button>
-                  <button className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2">
+                  <button 
+                    onClick={handleSendMessage}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2"
+                  >
                     <Mail className="w-5 h-5" />
                     Send Message
                   </button>
@@ -312,6 +332,15 @@ export default function CarDetails({ carId, onNavigate }) {
         <EMICalculatorModal 
           onClose={() => setShowEMIModal(false)}
           carPrice={car.price}
+        />
+      )}
+
+      {/* Chat Modal */}
+      {showChat && (
+        <Chat
+          car={car}
+          onClose={() => setShowChat(false)}
+          onNavigate={onNavigate}
         />
       )}
     </div>
