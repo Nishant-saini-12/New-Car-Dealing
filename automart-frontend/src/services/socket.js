@@ -6,13 +6,21 @@ let socket = null;
 // Initialize socket connection
 export const initializeSocket = () => {
   if (!socket) {
-    socket = io('http://localhost:5001', {
-      transports: ['websocket', 'polling'],
-      cors: {
-        origin: 'http://localhost:5173',
-        credentials: true
-      }
-    });
+    // socket = io('http://localhost:5001', {
+    //   transports: ['websocket', 'polling'],
+    //   cors: {
+    //     origin: 'http://localhost:5173',
+    //     credentials: true
+    //   }
+    // });
+
+
+    socket = io(import.meta.env.VITE_API_URL, {
+  transports: ['websocket', 'polling'],
+  withCredentials: true
+});
+
+
 
     socket.on('connect', () => {
       console.log('🔌 Connected to server:', socket.id);
